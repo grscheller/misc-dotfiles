@@ -3,7 +3,7 @@
 # Installs other software development infrastructure
 # into the user's $HOME directory.
 #
-# usage: otherInstall [ --install | --check | --remove | --clean | --nuke ]
+# usage: miscInstall [ --install | --check | --remove | --clean | --nuke ]
 #
 #        where --install: installs other development related config files
 #              --check:   checks what was installed
@@ -18,8 +18,7 @@ export DOTFILE_GIT_REPOS="${DOTFILE_GIT_REPOS:=$HOME/devel/dotfiles}"
 
 export DF_ACTION=install
 
-# export DOTFILES_GIT_REPO="${DEVEL_DOTFILES_GIT_REPO:=$DOTFILE_GIT_REPOS/bash_dotfiles}"
-export DOTFILES_GIT_REPO="${DEVEL_DOTFILES_GIT_REPO:=$DOTFILE_GIT_REPOS}"
+export DOTFILES_GIT_REPO="${MISC_DOTFILES_GIT_REPO:=$DOTFILE_GIT_REPOS/misc-dotfiles}"
 cd "$DOTFILES_GIT_REPO/home" || {
     printf '%s: failed to cd into %s\n' "$SCRIPT_NAME" "$DOTFILES_GIT_REPO/home" >&2
     exit 1
