@@ -1,0 +1,100 @@
+#!/bin/dash
+#
+# Installs other software development infrastructure
+# into the user's $HOME directory.
+#
+# usage: otherInstall [ --install | --check | --remove | --clean | --nuke ]
+#
+#        where --install: installs other development related config files
+#              --check:   checks what was installed
+#              --remove:  removes files which were installed
+#              --clean:   same as above, deletes emptied directories
+#              --nuke:    same as above but cleans up other content
+
+# shellcheck shell=sh
+
+export SCRIPT_NAME=develInstall
+export DOTFILE_GIT_REPOS="${DOTFILE_GIT_REPOS:=$HOME/devel/dotfiles}"
+
+export DF_ACTION=install
+
+# export DOTFILES_GIT_REPO="${DEVEL_DOTFILES_GIT_REPO:=$DOTFILE_GIT_REPOS/bash_dotfiles}"
+export DOTFILES_GIT_REPO="${DEVEL_DOTFILES_GIT_REPO:=$DOTFILE_GIT_REPOS}"
+cd "$DOTFILES_GIT_REPO/home" || {
+    printf '%s: failed to cd into %s\n' "$SCRIPT_NAME" "$DOTFILES_GIT_REPO/home" >&2
+    exit 1
+}
+
+umask 0022
+
+. ../bin/sourced/parse_cmdline.sh
+. ../bin/sourced/functions.sh
+. ../bin/sourced/configure_xdg_dirs.sh
+
+bin_scripts='
+    myCalc
+'
+
+cabal_files='
+    config
+'
+
+dot_config_files='
+    git/config
+'
+
+devel_files='
+    venvs/ve.conf
+'
+
+remove_items=''
+
+dirs_to_create="
+    $HOME/.cabal/bin
+    $HOME/.local/bin
+    $HOME/devel/node_lts
+    $HOME/devel/zig_nightly
+"
+
+items_to_clean="
+    $HOME/.cabal
+"
+
+items_to_nuke="
+    $HOME/devel/venvs
+    $HOME/devel/node_lts
+    $HOME/devel/zig_nightly
+"
+
+## Perform ACTION
+
+case "$DF_ACTION" in
+    install|check|remove)
+        # Process ~/bin scripts
+        process_files "$HOME/bin" "$bin_scripts" bin 0755
+        chmod 0755 "$HOME/bin"
+ 
+        # Process Cabal configs for Haskell
+        process_files "$HOME/.cabal" "$cabal_files" cabal 0644
+        chmod 0755 "$HOME/.cabal"
+
+        # Process miscellaneous ~/.config files
+        process_files "$XDG_CONFIG_HOME" "$dot_config_files" config 0644
+
+        # Process devel files
+        process_files "$HOME/devel" "$devel_files" devel 0644
+        chmod 0755 "$HOME/devel"
+
+        # Remove/report no longer needed files and directories
+        remove_items "$remove_items"
+
+        # Create/report missing/delete directories
+        ensure_dirs "$dirs_to_create"
+        ;;
+    clean)
+        remove_items "$items_to_clean"
+        ;;
+    nuke)
+        remove_items "$items_to_clean $items_to_nuke"
+        ;;
+esac
