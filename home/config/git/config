@@ -1,0 +1,22 @@
+[user]
+	name = grscheller
+	email = geoffrey@scheller.com
+	signingkey = ~/.ssh/id_ed25519_grscheller.pub
+[gpg]
+	format = ssh
+[core]
+	editor = nvim
+	fsmonitor = false
+	pager = nvim -R -c 'set filetype=git'
+[color]
+	pager = no
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main
+[submodules]
+	recurse = true
+[diff]
+	submodule = log
+[rerere]
+	enabled = true
