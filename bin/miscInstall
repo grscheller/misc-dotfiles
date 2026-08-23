@@ -51,7 +51,6 @@ remove_items=''
 dirs_to_create="
     $HOME/.cabal/bin
     $HOME/.local/bin
-    $HOME/devel/node_lts
     $HOME/devel/zig_nightly
 "
 
@@ -61,7 +60,6 @@ items_to_clean="
 
 items_to_nuke="
     $HOME/devel/venvs
-    $HOME/devel/node_lts
     $HOME/devel/zig_nightly
 "
 

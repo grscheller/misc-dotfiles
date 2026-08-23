@@ -1,22 +1,27 @@
 [user]
 	name = grscheller
 	email = geoffrey@scheller.com
-	signingkey = ~/.ssh/id_ed25519_grscheller.pub
 [gpg]
 	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+[commit]
+	gpgsign = true
 [core]
 	editor = nvim
 	fsmonitor = false
 	pager = nvim -R -c 'set filetype=git'
+	autocrlf = false
 [color]
 	pager = no
 [pull]
 	rebase = false
 [init]
 	defaultBranch = main
-[submodules]
-	recurse = true
-[diff]
-	submodule = log
 [rerere]
 	enabled = true
+# Machine-local settings -- signing key, work identities, anything
+# not shared across machines. Silently ignored when absent, so this
+# file can be deployed everywhere.
+[include]
+	path = local
