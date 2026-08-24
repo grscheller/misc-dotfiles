@@ -77,7 +77,7 @@ case "$DF_ACTION" in
         chmod 0755 "$HOME/.cabal"
 
         # Process miscellaneous ~/.config files
-        process_files "$XDG_CONFIG_HOME" "$dot_config_files" config 0644
+        process_files "$HOME/.config" "$dot_config_files" config 0644
 
         # Process devel files
         process_files "$HOME/devel" "$devel_files" devel 0644
