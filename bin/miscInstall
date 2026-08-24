@@ -40,6 +40,7 @@ cabal_files='
 
 dot_config_files='
     git/config
+    git/allowed_signers
 '
 
 devel_files='
