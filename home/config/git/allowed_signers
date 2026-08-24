@@ -6,6 +6,5 @@
 # The namespaces restriction limits each key to git signing, so a key
 # also used for SSH authentication cannot be silently accepted for
 # something else. Public keys only -- safe to version.
-
 geoffrey@scheller.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF9+MN4VqRrH36g/jSOT1pGHBZUVOQdyvkc0xXZJzwt6  # godel2, hamilton4
 geoffrey@scheller.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDvMDBJL1E0KXSl/PebLpqKBYRON2mklZ/z2SobLeKqn  # geoffrey
