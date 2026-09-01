@@ -1,0 +1,11 @@
+#
+# Local settings suitable for Git history.
+#
+[user]
+	signingkey = ~/.ssh/id_ed25519_grscheller.pub
+#
+# Settings not suitable for Git to track,
+# silently ignored when absent.
+#
+[include]
+	path = secret

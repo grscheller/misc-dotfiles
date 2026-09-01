@@ -71,7 +71,7 @@ case "$DF_ACTION" in
         # Process ~/bin scripts
         process_files "$HOME/bin" "$bin_scripts" bin 0755
         chmod 0755 "$HOME/bin"
- 
+
         # Process Cabal configs for Haskell
         process_files "$HOME/.cabal" "$cabal_files" cabal 0644
         chmod 0755 "$HOME/.cabal"
@@ -96,3 +96,21 @@ case "$DF_ACTION" in
         remove_items "$items_to_clean $items_to_nuke"
         ;;
 esac
+
+# Post ACTION Tasks
+
+test "$DF_ACTION" = install && {
+    # Install ~/.config/git/local
+    node_name=$(uname -n)
+    case "$node_name" in
+        godel2|hamilton4|onepiece)
+            cp config/git/local_linux "$XDG_CONFIG_HOME"/git/local
+            ;;
+        geoffrey)
+            cp config/git/local_windows "$XDG_CONFIG_HOME"/git/local
+            ;;
+        *)
+            msg="Unknown system: $node_name - $XDG_CONFIG_HOME/git/local not installed"
+            printf '%s\n' "$msg" >&2
+    esac
+}

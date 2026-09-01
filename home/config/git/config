@@ -1,3 +1,6 @@
+#
+# Settings shared across all systems.
+#
 [user]
 	name = grscheller
 	email = geoffrey@scheller.com
@@ -20,8 +23,8 @@
 	defaultBranch = main
 [rerere]
 	enabled = true
-# Machine-local settings -- signing key, work identities, anything
-# not shared across machines. Silently ignored when absent, so this
-# file can be deployed everywhere.
+#
+# Local settings, silently ignored by git when absent.
+#
 [include]
 	path = local

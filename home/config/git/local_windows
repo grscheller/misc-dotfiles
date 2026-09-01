@@ -1,0 +1,13 @@
+#
+# Local settings suitable for Git history.
+#
+[user]
+	signingkey = ~/.ssh/id_ed25519_grscheller_win.pub
+[core]
+	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
+#
+# Settings not suitable for Git to track,
+# silently ignored when absent.
+#
+[include]
+	path = secret
