@@ -41,10 +41,12 @@ cabal_files='
 dot_config_files='
     git/config
     git/allowed_signers
+    git/local_linux
+    git/local_windows
 '
 
 mintty_files='
-   .minttyrc 
+    .minttyrc 
 '
 
 devel_files='
