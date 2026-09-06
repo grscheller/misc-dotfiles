@@ -38,9 +38,12 @@ cabal_files='
     config
 '
 
-dot_config_files='
-    git/config
-    git/allowed_signers
+cabal_files='
+    config
+'
+
+mintty_files='
+   .minttyrc 
 '
 
 devel_files='
@@ -75,6 +78,9 @@ case "$DF_ACTION" in
         # Process Cabal configs for Haskell
         process_files "$HOME/.cabal" "$cabal_files" cabal 0644
         chmod 0755 "$HOME/.cabal"
+
+        # Process mintty rc file for the MSYS2 environment on Windows
+        process_files "$HOME" "$mintty_files" . 0644
 
         # Process miscellaneous ~/.config files
         process_files "$HOME/.config" "$dot_config_files" config 0644
