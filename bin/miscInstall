@@ -28,6 +28,7 @@ umask 0022
 
 . ../bin/sourced/parse_cmdline.sh
 . ../bin/sourced/functions.sh
+. ../bin/sourced/determine_os.sh
 . ../bin/sourced/configure_xdg_dirs.sh
 
 bin_scripts='
@@ -46,7 +47,7 @@ dot_config_files='
 '
 
 mintty_files='
-    .minttyrc 
+    .minttyrc
 '
 
 devel_files='
@@ -110,16 +111,12 @@ esac
 
 test "$DF_ACTION" = install && {
     # Install ~/.config/git/local
-    node_name=$(uname -n)
-    case "$node_name" in
-        godel2|hamilton4|onepiece)
-            cp config/git/local_linux "$XDG_CONFIG_HOME"/git/local
-            ;;
-        geoffrey)
+    case "$OS_GRS" in
+        windows)
             cp config/git/local_windows "$XDG_CONFIG_HOME"/git/local
             ;;
         *)
-            msg="Unknown system: $node_name - $XDG_CONFIG_HOME/git/local not installed"
-            printf '%s\n' "$msg" >&2
+            cp config/git/local_linux "$XDG_CONFIG_HOME"/git/local
+            ;;
     esac
 }
