@@ -1,14 +1,14 @@
 #!/usr/bin/env python
-
-# Using the old style tkinter libraries, not the newer tkinter.ttk version.
 #
-# I suspect Tk does not have working closurses, hence the
-# use of default parameters in the below lambda functions.
+# Warning: Many Linuxes and BSDs insist on calling their
+#          system Python executable "python3".
+#
+# Just a proof of concept for now. OOP code feels awkward using
+# a procedural interface. Using the old style tkinter libraries,
+# not the newer tkinter.ttk version.
 #
 # On tiling window managers, best run in a floating window.
 #
-# Note: many Linuxes and BSDs insist on calling their system Python
-#       executable "python3". I cannot bring myself to do this.
 
 import tkinter as tk
 import tkinter.font as tkfont
@@ -96,14 +96,14 @@ class myCalc(tk.Frame):
         )
 
         ## Construct calculator data entry buttons
-        for rowButtons in ('789/', '456*', '123-', '0.+'):
+        for button_labels in ('789/', '456*', '123-', '0.+'):
             button_frame = self._mk_frame(tk.TOP)
-            for rowButton in rowButtons:
+            for button_label in button_labels:
                 self._mk_button(
                     button_frame,
                     tk.LEFT,
-                    rowButton,
-                    (lambda disp=display, rb=rowButton: disp.set(disp.get() + rb))
+                    button_label,
+                    (lambda disp=display, rb=button_label: disp.set(disp.get() + rb))
                 )
 
         ## Construct bottom row
@@ -120,7 +120,15 @@ class myCalc(tk.Frame):
     def _calc(self, display):
         try:
             display.set(eval(display.get()))
-        except:
+        except (
+            SyntaxError,
+            ZeroDivisionError,
+            NameError,
+            TypeError,
+            ValueError,
+            OverflowError,
+        ):
             display.set("ERROR")
+
 
 myCalc().mainloop()
