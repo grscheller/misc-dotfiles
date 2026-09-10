@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/python3
 
 # Using the old style tkinter libraries, not the newer tkinter.ttk version.
 #
@@ -11,7 +11,7 @@ import tkinter as tk
 import tkinter.font as tkfont
 
 # Based on Kanagawa colorscheme
-class Color(object):
+class Color:
     winterBlue   = '#252535'
     lotusYellow  = '#77713F'
     lotusViolet3 = '#C9CBD1'
@@ -19,7 +19,6 @@ class Color(object):
 
 # Refactored calculator app I found on internet
 class myCalc(tk.Frame):
- 
     def _mk_frame(self, side):
         frame = tk.Frame(
             self,
@@ -32,10 +31,10 @@ class myCalc(tk.Frame):
             fill = tk.BOTH
         )
         return frame
-    
+
     def _mk_display(self, side, display):
         tk.Entry(
-            self, 
+            self,
             relief = tk.RIDGE,
             textvariable = display,
             borderwidth = 10,
@@ -69,17 +68,19 @@ class myCalc(tk.Frame):
             fill=tk.BOTH
         )
         return button
-    
+
     def __init__(self):
         ## Configure tk.Frame parent class
         tk.Frame.__init__(self)
-        self.option_add('*Font', tkfont.Font(family='arial', size=16, weight='bold'))
+
+        self._font = tkfont.Font(family='helvetica', size=36, weight='bold')
+        self.option_add('*Font', self._font)
         self.pack(expand=tk.YES, fill=tk.BOTH)
- 
+
         ## Construct display
         display = tk.StringVar()
         self._mk_display(tk.TOP, display)
- 
+
         ## Construct top row
         top_frame = self._mk_frame(tk.TOP)
 
@@ -90,7 +91,7 @@ class myCalc(tk.Frame):
             'C',
             (lambda disp=display, _='C': disp.set(''))
         )
- 
+
         ## Construct calculator data entry buttons
         for rowButtons in ('789/', '456*', '123-', '0.+'):
             button_frame = self._mk_frame(tk.TOP)
@@ -101,7 +102,7 @@ class myCalc(tk.Frame):
                     rowButton,
                     (lambda disp=display, rb=rowButton: disp.set(disp.get() + rb))
                 )
- 
+
         ## Construct bottom row
         bottom_frame = self._mk_frame(tk.TOP)
 
@@ -112,7 +113,7 @@ class myCalc(tk.Frame):
             (lambda _, _self=self, disp=display: _self._calc(disp)),
             '+'
         )
- 
+
     def _calc(self, display):
         try:
             display.set(eval(display.get()))
