@@ -50,11 +50,9 @@ mintty_files='
     .minttyrc
 '
 
-devel_files='
-    venvs/ve.conf
-'
-
-remove_items=''
+remove_items="
+    $HOME/devel/venvs
+"
 
 dirs_to_create="
     $HOME/.cabal/bin
@@ -67,7 +65,6 @@ items_to_clean="
 "
 
 items_to_nuke="
-    $HOME/devel/venvs
     $HOME/devel/zig_nightly
 "
 
@@ -88,10 +85,6 @@ case "$DF_ACTION" in
 
         # Process .minttyrc file for the MSYS2 environment on Windows
         process_files "$HOME" "$mintty_files" . 0644
-
-        # Process devel files
-        process_files "$HOME/devel" "$devel_files" devel 0644
-        chmod 0755 "$HOME/devel"
 
         # Remove/report no longer needed files and directories
         remove_items "$remove_items"
