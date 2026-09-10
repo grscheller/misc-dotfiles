@@ -6,6 +6,9 @@
 # use of default parameters in the below lambda functions.
 #
 # On tiling window managers, best run in a floating window.
+#
+# Note: many Linuxes and BSDs insist on calling their system Python
+#       executable "python3". I cannot bring myself to do this.
 
 import tkinter as tk
 import tkinter.font as tkfont
