@@ -44,6 +44,7 @@ dot_config_files='
     git/allowed_signers
     git/local_linux
     git/local_windows
+    uv/uv.toml
 '
 
 mintty_files='
